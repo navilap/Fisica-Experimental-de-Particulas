@@ -5,7 +5,13 @@ Solución al taller de análisis de datos Tracks&Clusters.
 Autor:
 * Nicolás Alejandro Ávila Pérez
 
-1. Las gráficas de los puntos 1., 2., 3. y 4. fueron generadas con el macro *Tracks_Clusters_macro.C* y se pueden encontrar en la carpeta *Plots*.
+1. Las gráficas fueron generadas con el macro *Tracks_Clusters_macro.C* y se pueden encontrar en la carpeta *Plots*.
+
+2. Las gráficas fueron generadas con el macro *Tracks_Clusters_macro.C* y se pueden encontrar en la carpeta *Plots*.
+
+3. Las gráficas fueron generadas con el macro *Tracks_Clusters_macro.C* y se pueden encontrar en la carpeta *Plots*.
+
+4. Las gráficas fueron generadas con el macro *Tracks_Clusters_macro.C* y se pueden encontrar en la carpeta *Plots*.
 
 5. Los significados de cada variable:
 
