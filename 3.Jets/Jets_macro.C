@@ -12,10 +12,14 @@ void Jets_macro()
   float evtw = -1;
   vector<float> *reco_R4_pt = 0;
   vector<float> *truth_R4_pt = 0;
+  vector<float> *reco_R10_pt = 0;
+  vector<float> *truth_R10_pt = 0;
 
   tree->SetBranchAddress("EventWeight", &evtw);
   tree->SetBranchAddress("RecoJets_R4_pt", &reco_R4_pt);
   tree->SetBranchAddress("TruthJets_R4_pt", &truth_R4_pt);
+  tree->SetBranchAddress("RecoJets_R10_pt", &reco_R10_pt);
+  tree->SetBranchAddress("TruthJets_R10_pt", &truth_R10_pt);
 
   // Canvas
   TCanvas *canvas = new TCanvas("Canvas", "", 800, 600);
