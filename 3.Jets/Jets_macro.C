@@ -252,5 +252,12 @@ void Jets_macro()
   canvas->Clear();
   prof_reco_jet_R10_Trimmed_pt_npv->Draw("");
   canvas->Print("Prof_Reco_Jets_R10_Trimmed_pt_npv.pdf");
+  canvas->Clear();
+
+  hist_truth_jet_R10_Trimmed_pt_npv->Draw("colz");
+  canvas->Print("Hist_Truth_Jets_R10_Trimmed_pt_npv.pdf");
+  canvas->Clear();
+  prof_truth_jet_R10_Trimmed_pt_npv->Draw("");
+  canvas->Print("Prof_Truth_Jets_R10_Trimmed_pt_npv.pdf");
   canvas->Clear();*/
 }
