@@ -51,6 +51,11 @@ void Jets_macro()
   TH2F *hist_truth_jet_R4_pt_npv = new TH2F("Truth-jet pT vs. NPV", ";NPV; jet pT", 40, 1, 40, 20, 0, 200);
   TProfile *prof_truth_jet_R4_pt_npv = new TProfile("Profile Truth-jet pT vs. NPV", ";NPV; jet pT", 40, 1, 40, 0, 200);
 
+  TH2F *hist_reco_jet_R10_pt_npv = new TH2F("Reco-jet pT vs. NPV", ";NPV; jet pT", 50, 140, 240, 20, 0, 200);
+  TProfile *prof_reco_jet_R10_pt_npv = new TProfile("Profile Reco-jet pT vs. NPV", ";NPV; jet pT", 50, 140, 240, 0, 200);
+  TH2F *hist_truth_jet_R10_pt_npv = new TH2F("Truth-jet pT vs. NPV", ";NPV; jet pT", 40, 1, 40, 20, 0, 200);
+  TProfile *prof_truth_jet_R10_pt_npv = new TProfile("Profile Truth-jet pT vs. NPV", ";NPV; jet pT", 40, 1, 40, 0, 200);
+
   // Fill histograms
   int nentries, nbytes, i;
   nentries = (Int_t)tree->GetEntries();
@@ -111,6 +116,24 @@ void Jets_macro()
       {
         hist_truth_jet_R4_pt_npv->Fill(truth_R4_pt->at(j) / 1000., npv, evtw);
         prof_truth_jet_R4_pt_npv->Fill(truth_R4_pt->at(j) / 1000., npv, evtw);
+      }
+    }
+
+    if (reco_R10_pt->size() != 0 && reco_R10_pt->at(0) > 20000.)
+    {
+      for (int j = 0; j < reco_R10_pt->size(); j++)
+      {
+        hist_reco_jet_R10_pt_npv->Fill(reco_R10_pt->at(j) / 1000., npv, evtw);
+        prof_reco_jet_R10_pt_npv->Fill(reco_R10_pt->at(j) / 1000., npv, evtw);
+      }
+    }
+
+    if (truth_R10_pt->size() != 0 && truth_R10_pt->at(0) > 20000.)
+    {
+      for (int j = 0; j < truth_R10_pt->size(); j++)
+      {
+        hist_truth_jet_R10_pt_npv->Fill(truth_R10_pt->at(j) / 1000., npv, evtw);
+        prof_truth_jet_R10_pt_npv->Fill(truth_R10_pt->at(j) / 1000., npv, evtw);
       }
     }
   }
@@ -185,5 +208,12 @@ void Jets_macro()
   canvas->Clear();
   prof_truth_jet_R4_pt_npv->Draw("");
   canvas->Print("Prof_Truth_Jets_R4_pt_npv.pdf");
+  canvas->Clear();
+
+  hist_reco_jet_R10_pt_npv->Draw("colz");
+  canvas->Print("Hist_Reco_Jets_R10_pt_npv.pdf");
+  canvas->Clear();
+  prof_reco_jet_R10_pt_npv->Draw("");
+  canvas->Print("Prof_Reco_Jets_R10_pt_npv.pdf");
   canvas->Clear();*/
 }
