@@ -53,8 +53,8 @@ void Jets_macro()
 
   TH2F *hist_reco_jet_R10_pt_npv = new TH2F("Reco-jet pT vs. NPV", ";NPV; jet pT", 50, 140, 240, 20, 0, 200);
   TProfile *prof_reco_jet_R10_pt_npv = new TProfile("Profile Reco-jet pT vs. NPV", ";NPV; jet pT", 50, 140, 240, 0, 200);
-  TH2F *hist_truth_jet_R10_pt_npv = new TH2F("Truth-jet pT vs. NPV", ";NPV; jet pT", 40, 1, 40, 20, 0, 200);
-  TProfile *prof_truth_jet_R10_pt_npv = new TProfile("Profile Truth-jet pT vs. NPV", ";NPV; jet pT", 40, 1, 40, 0, 200);
+  TH2F *hist_truth_jet_R10_pt_npv = new TH2F("Truth-jet pT vs. NPV", ";NPV; jet pT", 50, 1, 240, 20, 0, 200);
+  TProfile *prof_truth_jet_R10_pt_npv = new TProfile("Profile Truth-jet pT vs. NPV", ";NPV; jet pT", 50, 1, 240, 0, 200);
 
   // Fill histograms
   int nentries, nbytes, i;
@@ -215,5 +215,12 @@ void Jets_macro()
   canvas->Clear();
   prof_reco_jet_R10_pt_npv->Draw("");
   canvas->Print("Prof_Reco_Jets_R10_pt_npv.pdf");
+  canvas->Clear();
+
+  hist_truth_jet_R10_pt_npv->Draw("colz");
+  canvas->Print("Hist_Truth_Jets_R10_pt_npv.pdf");
+  canvas->Clear();
+  prof_truth_jet_R10_pt_npv->Draw("");
+  canvas->Print("Prof_Truth_Jets_R10_pt_npv.pdf");
   canvas->Clear();*/
 }
