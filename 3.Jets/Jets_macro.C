@@ -1,3 +1,5 @@
+#include <iostream>
+
 void Jets_macro()
 {
 
@@ -17,6 +19,8 @@ void Jets_macro()
   vector<float> *reco_R10_Trimmed_pt = 0;
   vector<float> *truth_R10_Trimmed_pt = 0;
   UInt_t npv = -1;
+  vector<float> *reco_R4_jvf = 0;
+  vector<float> *track_R4_pt = {};
 
   tree->SetBranchAddress("EventWeight", &evtw);
   tree->SetBranchAddress("RecoJets_R4_pt", &reco_R4_pt);
@@ -26,6 +30,8 @@ void Jets_macro()
   tree->SetBranchAddress("RecoJets_R10_Trimmed_pt", &reco_R10_Trimmed_pt);
   tree->SetBranchAddress("TruthJets_R10_Trimmed_pt", &truth_R10_Trimmed_pt);
   tree->SetBranchAddress("NPV", &npv);
+  tree->SetBranchAddress("RecoJets_R4_jvf", &reco_R4_jvf);
+  tree->SetBranchAddress("TrackJets_R4_pt", &track_R4_pt);
 
   // Canvas
   TCanvas *canvas = new TCanvas("Canvas", "", 800, 600);
@@ -60,6 +66,11 @@ void Jets_macro()
   TProfile *prof_reco_jet_R10_Trimmed_pt_npv = new TProfile("Profile Reco-jet pT vs. NPV", ";NPV; jet pT", 50, 1, 240, 0, 200);
   TH2F *hist_truth_jet_R10_Trimmed_pt_npv = new TH2F("Truth-jet pT vs. NPV", ";NPV; jet pT", 50, 1, 240, 20, 0, 200);
   TProfile *prof_truth_jet_R10_Trimmed_pt_npv = new TProfile("Profile Truth-jet pT vs. NPV", ";NPV; jet pT", 50, 1, 240, 0, 200);
+
+  TH1F *hist_leadreco_pt_compare_c = new TH1F("Lead Reco-jet (cuts)", "Leading jet pT; pT (GeV);Events", 20, 0, 200);
+  TH1F *hist_leadreco_pt_compare = new TH1F("Lead Reco-jet Compare", "Leading jet pT; pT (GeV);Events", 20, 0, 200);
+  TH1F *hist_leadtruth_pt_compare = new TH1F("Lead Truth-jet Compare", "Leading jet pT; pT (GeV);Events", 20, 0, 200);
+  TH1F *hist_leadtrack_pt_compare = new TH1F("Lead Track-jet Compare", "Leading jet pT; pT (GeV);Events", 20, 0, 200);
 
   // Fill histograms
   int nentries, nbytes, i;
@@ -158,6 +169,22 @@ void Jets_macro()
         hist_truth_jet_R10_Trimmed_pt_npv->Fill(truth_R10_Trimmed_pt->at(j) / 1000., npv, evtw);
         prof_truth_jet_R10_Trimmed_pt_npv->Fill(truth_R10_Trimmed_pt->at(j) / 1000., npv, evtw);
       }
+    }
+
+    if (reco_R4_pt->size() != 0 && reco_R4_pt->at(0) > 20000.)
+    {
+      hist_leadreco_pt_compare->Fill(reco_R4_pt->at(0) / 1000., evtw);
+      hist_leadtruth_pt_compare->Fill(truth_R4_pt->at(0) / 1000., evtw);
+
+      if (std::abs(reco_R4_jvf->at(0)) > 0.5)
+      {
+        hist_leadreco_pt_compare_c->Fill(reco_R4_pt->at(0) / 1000., evtw);
+      }
+    }
+
+    if (track_R4_pt->size() != 0)
+    {
+      hist_leadtrack_pt_compare->Fill(track_R4_pt->at(0) / 1000., evtw);
     }
   }
 
@@ -259,5 +286,35 @@ void Jets_macro()
   canvas->Clear();
   prof_truth_jet_R10_Trimmed_pt_npv->Draw("");
   canvas->Print("Prof_Truth_Jets_R10_Trimmed_pt_npv.pdf");
+  canvas->Clear();
+
+  hist_leadreco_pt_compare_c->SetMarkerStyle(20);
+  hist_leadreco_pt_compare_c->SetMarkerColor(kRed);
+  hist_leadreco_pt_compare_c->Draw("");
+
+  hist_leadreco_pt_compare->SetMarkerStyle(20);
+  hist_leadreco_pt_compare->SetMarkerColor(kOrange);
+  hist_leadreco_pt_compare->Draw("Same");
+
+  hist_leadtruth_pt_compare->SetMarkerStyle(20);
+  hist_leadtruth_pt_compare->SetMarkerColor(kBlue);
+  hist_leadtruth_pt_compare->Draw("Same");
+
+  canvas->Print("Lead_truth_reco_c.pdf");
   canvas->Clear();*/
+
+   hist_leadreco_pt_compare_c->SetMarkerStyle(20);
+  hist_leadreco_pt_compare_c->SetMarkerColor(kRed);
+  hist_leadreco_pt_compare_c->Draw("");
+
+  hist_leadreco_pt_compare->SetMarkerStyle(20);
+  hist_leadreco_pt_compare->SetMarkerColor(kOrange);
+  hist_leadreco_pt_compare->Draw("Same");
+
+  hist_leadtrack_pt_compare->SetMarkerStyle(20);
+  hist_leadtrack_pt_compare->SetMarkerColor(kBlue);
+  hist_leadtrack_pt_compare->Draw("Same");
+
+  canvas->Print("Lead_track_reco_c.pdf");
+  canvas->Clear();
 }
