@@ -191,7 +191,7 @@ void Jets_macro()
   std::cout << "Done!" << std::endl;
 
   // Print histograms
-  /*hist_leadtruth_R4_pt_evtw->SetMarkerStyle(20);
+  hist_leadtruth_R4_pt_evtw->SetMarkerStyle(20);
   hist_leadtruth_R4_pt_evtw->SetMarkerColor(1);
   hist_leadtruth_R4_pt_evtw->Draw("");
   hist_leadreco_R4_pt_evtw->SetMarkerStyle(20);
@@ -301,7 +301,7 @@ void Jets_macro()
   hist_leadtruth_pt_compare->Draw("Same");
 
   canvas->Print("Lead_truth_reco_c.pdf");
-  canvas->Clear();*/
+  canvas->Clear();
 
    hist_leadreco_pt_compare_c->SetMarkerStyle(20);
   hist_leadreco_pt_compare_c->SetMarkerColor(kRed);
